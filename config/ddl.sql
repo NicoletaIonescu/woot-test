@@ -1,44 +1,46 @@
-INSERT INTO `entity_type` (`id`, `name`, `luck_min`, `luck_max`) VALUES
-                                                                 (1, 'courier', 15, 35),
-                                                                 (2, 'package', 20, 35);
+CREATE TABLE `entity_type` (
+                               `id` int(11) PRIMARY KEY NOT NULL,
+                               `name` varchar(255) NOT NULL,
+                               `luck_min` int(11) NOT NULL,
+                               `luck_max` int(11) NOT NULL
+);
 
+CREATE TABLE `entity_type_skills` (
+                                      `id` int(11) PRIMARY KEY NOT NULL,
+                                      `id_skill` int(11) NOT NULL,
+                                      `id_entity_type` int(11) NOT NULL
+);
 
-INSERT INTO `stats` (`id`, `name`) VALUES
-                                       (1, 'stamina'),
-                                       (2, 'speed'),
-                                       (3, 'strenght'),
-                                       (4, 'efficency'),
-                                       (5, 'distance'),
-                                       (6, 'weight'),
-                                       (7, 'traffic'),
-                                       (8, 'urgency');
+CREATE TABLE `entity_type_stats` (
+                                     `id` int(11) PRIMARY KEY NOT NULL,
+                                     `id_entity_type` int(11) NOT NULL,
+                                     `id_stat` int(11) NOT NULL
+);
 
-INSERT INTO `skills` (`id`, `name`) VALUES
-                                        (1, 'quick_route'),
-                                        (2, 'heavy_lifting'),
-                                        (3, 'impact');
+CREATE TABLE `skills` (
+                          `id` int(11) PRIMARY KEY NOT NULL,
+                          `name` varchar(255) NOT NULL
+);
 
-INSERT INTO `stats_prop` (`id`, `id_stat`, `min`, `max`, `measurement`) VALUES
-                                                                            (7, 7, 30, 60, '%'),
-                                                                            (4, 4, 50, 70, 'efficency'),
-                                                                            (6, 6, 10, 50, 'kg'),
-                                                                            (5, 5, 5, 20, 'km'),
-                                                                            (2, 2, 60, 90, 'km/h'),
-                                                                            (8, 8, 1, 5, 'priority'),
-                                                                            (1, 1, 80, 120, 'stamina'),
-                                                                            (3, 3, 50, 70, 'strenght');
+CREATE TABLE `stats` (
+                         `id` int(11) PRIMARY KEY NOT NULL,
+                         `name` varchar(255) NOT NULL
+);
 
-INSERT INTO `entity_type_stats` (`id`, `id_entity_type`, `id_stat`) VALUES
-                                                                        (1, 1, 1),
-                                                                        (2, 1, 2),
-                                                                        (3, 1, 3),
-                                                                        (4, 1, 4),
-                                                                        (5, 2, 5),
-                                                                        (6, 2, 6),
-                                                                        (7, 2, 7),
-                                                                        (8, 2, 8);
+CREATE TABLE `stats_prop` (
+                              `id` int(11) PRIMARY KEY NOT NULL,
+                              `id_stat` int(11) NOT NULL,
+                              `min` int(11) NOT NULL,
+                              `max` int(11) NOT NULL,
+                              `measurement` varchar(255) NOT NULL
+);
 
-INSERT INTO `entity_type_skills` (`id`, `id_skill`, `id_entity_type`) VALUES
-                                                                          (1, 1, 1),
-                                                                          (2, 2, 1),
-                                                                          (3, 3, 2);
+ALTER TABLE `entity_type_skills` ADD CONSTRAINT `entity_type_skills_FK_1` FOREIGN KEY (`id_skill`) REFERENCES `skills` (`id`);
+
+ALTER TABLE `entity_type_skills` ADD CONSTRAINT `entity_type_skills_FK_2` FOREIGN KEY (`id_entity_type`) REFERENCES `entity_type` (`id`);
+
+ALTER TABLE `entity_type_stats` ADD CONSTRAINT `entity_type_stats_FK_1` FOREIGN KEY (`id_stat`) REFERENCES `stats` (`id`);
+
+ALTER TABLE `entity_type_stats` ADD CONSTRAINT `entity_type_stats_FK_2` FOREIGN KEY (`id_entity_type`) REFERENCES `entity_type` (`id`);
+
+ALTER TABLE `stats_prop` ADD CONSTRAINT `stats_prop_FK_1` FOREIGN KEY (`id_stat`) REFERENCES `stats` (`id`);
