@@ -53,15 +53,15 @@ class Game
     {
         try {
 
-        usort($this->challanges, function (Entity $a, Entity $b) use ($statName){
-            if ($b->getStatValue($statName) === $a->getStatValue($statName)){
-                return $b->luck->value <=> $a->luck->value;
-            }
-            return $b->getStatValue($statName) <=> $a->getStatValue($statName);
-        });
+            usort($this->challanges, function (Entity $a, Entity $b) use ($statName){
+                if ($b->getStatValue($statName) === $a->getStatValue($statName)){
+                    return $b->luck->value <=> $a->luck->value;
+                }
+                return $b->getStatValue($statName) <=> $a->getStatValue($statName);
+            });
 
         } catch (\Exception) {
-            throw new Exception ("Can not make the sort the entity does not have the stat for that");
+            throw new \Exception ("Can not make the sort the entity does not have the stat for that");
         }
 
     }
