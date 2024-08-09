@@ -18,7 +18,7 @@ class Db
     }
 
     private static function _getConnection(){
-        $options = parse_ini_file('./config/database.ini');
+        $options = parse_ini_file('./env.ini');
         return self::$_instance = new Database($options);
     }
 }
