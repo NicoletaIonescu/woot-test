@@ -6,6 +6,7 @@
 
 I haven't gotten yet to create a docker environment, so you will need:
 
+- Composer
 - PHP 8 or higher
 - MySQL
 
@@ -14,8 +15,8 @@ I haven't gotten yet to create a docker environment, so you will need:
   1. clone project
   2. composer install 
   3. copy the .env.example file into .env file with the needed data to connect to db
-  4. run the structure of the db into your database (config/dml.sql)
-  5. run the values for the db into your database 
+  4. run the structure of the db into your database (config/ddl.sql)
+  5. run the values for the db into your database (config/dml.sql)
   4. Yey! Configured. :) 
 
 ## About
